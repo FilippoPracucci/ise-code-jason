@@ -1,4 +1,4 @@
-import org.gradle.configurationcache.extensions.capitalized
+import java.util.Locale
 
 plugins {
     java
@@ -9,7 +9,7 @@ allprojects {
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
+            languageVersion = JavaLanguageVersion.of(21)
         }
     }
 
@@ -30,7 +30,7 @@ subprojects {
     }
 
     dependencies {
-        implementation("io.github.jason-lang:jason-interpreter:3.2.1")
+        implementation("io.github.jason-lang:jason-interpreter:3.2.1") // Java 17
         testImplementation("junit", "junit", "4.13.2")
     }
 
@@ -44,4 +44,8 @@ subprojects {
             javaLauncher.set(javaToolchains.launcherFor(java.toolchain))
         }
     }
+}
+
+fun String.capitalized(): String {
+    return this.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 }
