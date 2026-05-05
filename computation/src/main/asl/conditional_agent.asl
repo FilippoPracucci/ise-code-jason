@@ -5,6 +5,7 @@
 
 /* Plans */
 
+/* Exploitation of guards and conditional actions */
 +!start(N, M) : N <= M <-
 	!on_step(N);
 	if (N < M) { !start(N + 1, M) }.

@@ -1,10 +1,15 @@
 /* Initial beliefs and rules */
 
-/* Initial goals */
+// belief(...).
 
-!start.
+/* Initial goals (sort of entry point, so functions called in a main) */
 
-/* Plans */
+!greet_the_user. // Symbol as prefix respect to a belief.
 
-+!start : true <- 
+/* Plans (sort of functions) */
+
+/* Whenever there is a new event all the agents with !greet_the_user as goal will execute this plan,
+if the guard is true (: true in this case) */
+/* Head [: guard] <- body. */
++!greet_the_user : true <- 
 	.print("hello world").

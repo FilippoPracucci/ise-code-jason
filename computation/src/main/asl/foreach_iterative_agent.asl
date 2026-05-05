@@ -1,6 +1,7 @@
 /* Initial beliefs and rules */
-nat(z).
-nat(s(X)) :- nat(X).
+// Peano numbers
+nat(z). // fact
+nat(s(X)) :- nat(X). // rule: s(X) is a natural number if X is a natural number
 
 // nat(1).
 // nat(2).
@@ -12,6 +13,7 @@ nat(s(X)) :- nat(X).
 /* Plans */
 +!start <-
     // this only works in jason 2.5+
+    /* for all possibile solution of the condition */
     for(nat(X)) {
         .print("value ", X);
         .wait(1000);

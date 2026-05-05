@@ -1,9 +1,10 @@
 MAS helloworld {
 
-	infrastructure: Centralised
+	infrastructure: Centralised // same infrastructure for all agents
 
+	// agents created at start time
 	agents:
-		agent1 hello_agent;
+		agent1 hello_agent; // name and type of agent (asl file name without extension)
 
 	aslSourcePath:
 		"src/main/asl";

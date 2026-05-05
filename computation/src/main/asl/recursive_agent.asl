@@ -9,4 +9,4 @@
 +!start(N) <- 
     .print("hello world ", N);
     .wait(1000);
-    !start(N + 1).
+    !start(N + 1). // recursive subgoal => continuous behavior.
