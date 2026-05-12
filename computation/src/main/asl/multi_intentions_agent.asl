@@ -11,5 +11,5 @@
 +!count(N, M) : N < M <-
     .print("count ", N);
     .wait(1000);
-    if (N = 7) { !!count(1, M) };
+    if (N = 7) { !!count(1, M) }; // spawn a new intention
     !count(N + 1, M).

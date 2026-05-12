@@ -17,7 +17,7 @@ failures(0).
         .fail
     }.
 
-/*
+/* if failing gambling (trying to achieve the goal !gamble) */
 -!gamble : failures(N) & max_failures(M) <-
     -+failures(N + 1);
     if (N < M) {
@@ -26,4 +26,3 @@ failures(0).
     } else {
         .print("I'm done with this shit.");
     }.
-*/
