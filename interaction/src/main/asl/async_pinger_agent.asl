@@ -1,5 +1,6 @@
 /* Initial beliefs and rules */
 
+/* Implicitly annotated with source(self) */
 turn(me).
 other(pong).
 
@@ -13,9 +14,11 @@ other(pong).
   -+turn(other);
   !sendMessageTo(ball, Receiver).
 
-+ball[source(Sender)] : turn(other) & other(Sender) <-
+/* event of a belief's addition
+  [source(Sender)] is an annotation*/
++ball[source(Sender)] : turn(other) & other(Sender) <- // condition hold when Sender == pong
   -+turn(me);
-  -ball[source(Sender)];
+  -ball[source(Sender)]; // remove the belief after processing (if omitted the agent memory will be filled quickly)
   .print("Received ball from ", Sender);
   .print("Done").
 

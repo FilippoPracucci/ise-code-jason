@@ -10,3 +10,5 @@ status(lost).
 -!go_around : not(status(lost)) <- true.
 
 /* TODO: handle the rescuing scenario */
++followMe(_)    [Source(R)] : status(lost) <-
+    -+status(found)

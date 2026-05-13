@@ -5,6 +5,7 @@ import jason.asSyntax.Structure;
 import jason.environment.Environment;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -57,7 +58,9 @@ public class Arena2DEnvironment extends Environment {
 
     @Override
     public Collection<Literal> getPercepts(String agName) {
-        throw new IllegalStateException("not implemented");
+        return Stream.of(neighboursPercepts(agName), surroundingPercepts(agName))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     private boolean isPositionObstacleFor(String agent, Vector2D position) {
@@ -67,7 +70,20 @@ public class Arena2DEnvironment extends Environment {
     }
 
     private Collection<Literal> surroundingPercepts(String agent) {
-        throw new IllegalStateException("not implemented");
+        return model.getAgentSurroundingPositions(agent)
+                .entrySet().stream()
+                .map(it -> proximityPerceptFor(it.getKey(), it.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    private Literal proximityPerceptFor(Direction direction, Vector2D position) {
+        if (model.getAgentByPosition(position).isPresent()) {
+            return Literal.parseLiteral(String.format("robot(%s)", direction.name().toLowerCase()));
+        } else if (model.isPositionOutside(position)) {
+            return Literal.parseLiteral(String.format("obstacle(%s)", direction.name().toLowerCase()));
+        } else {
+            return Literal.parseLiteral(String.format("free(%s)", direction.name().toLowerCase()));
+        }
     }
 
     private Collection<Literal> neighboursPercepts(String agent) {
@@ -90,13 +106,13 @@ public class Arena2DEnvironment extends Environment {
         if (RAND.nextDouble() < model.getSlideProbability()) {
             result = false;
         } else if (action.equals(moveForward)) {
-            throw new IllegalStateException("not implemented");
+            result = model.moveAgent(ag, 1, FORWARD);
         } else if (action.equals(moveRight)) {
-            throw new IllegalStateException("not implemented");
+            result = model.moveAgent(ag, 1, RIGHT);
         } else if (action.equals(moveBackward)) {
-            throw new IllegalStateException("not implemented");
+            result = model.moveAgent(ag, 1, BACKWARD);
         } else if (action.equals(moveLeft)) {
-            throw new IllegalStateException("not implemented");
+            result = model.moveAgent(ag, 1, LEFT);
         } else if (action.equals(moveRandom)) {
             Direction rd = Direction.random();
             result = model.moveAgent(ag, 1, rd);

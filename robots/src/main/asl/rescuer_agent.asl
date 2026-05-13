@@ -17,10 +17,11 @@ status(exploring).
     !explore.
 -!explore : status(exploring) <-
     !change_direction;
-    .print("Let's go home!")
+    .print("Let's go home!");
     !explore.
 
-+!come_back <- .fail. /* TODO */
++!come_back : status(exploring) <-
+    .broadcast(tell, followMe(self)).
 
 +!go_on(0) <- true.
 +!go_on(N) : N > 0 & free(forward) <-

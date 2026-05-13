@@ -8,7 +8,7 @@
 
 +!seek_others <-
   +found(0);
-  .broadcast(askOne, whosThere(_));
+  .broadcast(askOne, whosThere(_)); // askOne force the receiver to react to the test goal whosThere(_)
   .wait(found(3));
   -found(_);
   .print("I found you all!").

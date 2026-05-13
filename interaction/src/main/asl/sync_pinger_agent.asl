@@ -18,7 +18,7 @@ other(pong).
   !sendMessageTo(ball, Receiver).
 
 +!receive_pong : turn(other) & other(Sender) <-
-  .wait({ +ball[source(Sender)] });
+  .wait({ +ball[source(Sender)] }); // explicit wait operation to receive the message
   -+turn(me);
   -ball[source(Sender)];
   .print("Received ball from ", Sender);
